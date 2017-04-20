@@ -24,6 +24,7 @@ public class Keypad extends Actor
     int keypadCentreCordinateY=475;
     int keypadStartCordinateX=keypadCentreCordinateX-(keypadWidth/2);
     int keypadStartCordinateY=keypadCentreCordinateY-(keypadHeight/2);
+    String keyInput="";
     
     public Keypad()
     {
@@ -42,13 +43,15 @@ public class Keypad extends Actor
        //setLocation(mouseCordinateX,mouseCordinateY);
        System.out.println(mouseCoordinateX);
        System.out.println(mouseCoordinateY);
-       getButtonInfo();
+       String Key=ButtonInfo();
+       System.out.println(Key);
+       System.out.println(inputString(Key));
      }
      
     } 
     
    
-     public String getButtonInfo()
+     public String ButtonInfo()
     {
         String KeyString=null;
         int KeyNum=0;
@@ -68,26 +71,43 @@ public class Keypad extends Actor
                    
                    if(KeyNum==10)
                    { KeyString="*";
+                     System.out.println(KeyString);
                      return KeyString;
                    }
                    if(KeyNum==11)
                    {
                    KeyString="0";
+                   System.out.println(KeyString);
                    return KeyString;
                    }
                    if(KeyNum==12)
                    {
                    KeyString="#";
+                   System.out.println(KeyString);
                    return KeyString;
                    }
                    KeyString=String.valueOf(KeyNum);
                    System.out.println(KeyNum);
                    System.out.println(KeyString);
+                   return KeyString;
                 }
                 
         }
      }
      return KeyString;
     }
-   
+    
+        public String inputString(String key){
+            if(key == "*")
+            { System.out.println("Do nothing");}
+            if(key == "#")
+            { keyInput=keyInput.substring(0,keyInput.length() - 1);}
+           
+            if(key != "*" && key != "#")
+            {keyInput=keyInput+key;}
+            System.out.println(keyInput);
+            return keyInput;
+        }
+            
+
 }
