@@ -12,8 +12,8 @@ public class Keypad extends Actor
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     
-    int numberOfButtonRow=3;
-    int numberOfButtonCol=4;
+    int numberOfButtonRow=4;
+    int numberOfButtonCol=3;
     int keypadWidth=240;
     int keypadHeight=320;
     int buttonlength=80;
@@ -54,16 +54,34 @@ public class Keypad extends Actor
         int KeyNum=0;
         for (int i=0;i<numberOfButtonRow;i++){
             for (int j=0;j<numberOfButtonCol;j++){
-                if((i*buttonlength)+keypadStartCordinateX<=mouseCoordinateX && ((i+1)*buttonlength)+keypadStartCordinateX>mouseCoordinateX && (j*buttonWidth)+keypadStartCordinateY<=mouseCoordinateY && ((j+1)*buttonWidth)+keypadStartCordinateY>mouseCoordinateY)
+                KeyNum = KeyNum+1;
+                int rangeStartX=(j*buttonlength)+keypadStartCordinateX;
+                int rangeEndX=((j+1)*buttonlength)+keypadStartCordinateX;
+                int rangeStartY=(i*buttonWidth)+keypadStartCordinateY;
+                int rangeEndY=((i+1)*buttonWidth)+keypadStartCordinateY;
+                
+                //System.out.println(rangeStartX+" "+rangeEndX);
+                //System.out.println(rangeStartY+" "+rangeEndY);
+                
+                if(rangeStartX<=mouseCoordinateX && rangeEndX>mouseCoordinateX && rangeStartY<=mouseCoordinateY && rangeEndY>mouseCoordinateY)
                 {  
-                   KeyNum = KeyNum+1;
+                   
                    if(KeyNum==10)
-                   KeyString="*";
+                   { KeyString="*";
+                     return KeyString;
+                   }
                    if(KeyNum==11)
+                   {
                    KeyString="0";
+                   return KeyString;
+                   }
                    if(KeyNum==12)
+                   {
                    KeyString="#";
+                   return KeyString;
+                   }
                    KeyString=String.valueOf(KeyNum);
+                   System.out.println(KeyNum);
                    System.out.println(KeyString);
                 }
                 
